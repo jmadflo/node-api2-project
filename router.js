@@ -58,4 +58,15 @@ router.post('/:id/comments', (req, res) => {
     }
 })
 
+router.get('/', (req, res) => {
+    // get all the posts from the database or return 500 error if unsuccessful
+    data.find()
+        .then(allPosts => {
+            res.status(201).json(allPosts)
+        })
+        .catch(() => {
+            res.status(500).json({ error: "The posts information could not be retrieved." })
+        })
+})
+
 module.exports = router
