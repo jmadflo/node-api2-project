@@ -14,7 +14,10 @@ router.post('/', (req, res) => {
             .then(idObject => {
                 data.findById(idObject.id)
                     .then(insertedPost => {
-                        res.status(201).json(insertedPost)
+                        // [] is a truthy value, so we have to take that into account
+                        if (insertedPost.length > 0) {
+                            res.status(201).json(insertedPost)
+                        }
                     })
                     // if post cannot be retrieved then alert error
                     .catch(error => {
@@ -68,5 +71,24 @@ router.get('/', (req, res) => {
             res.status(500).json({ error: "The posts information could not be retrieved." })
         })
 })
+
+router.get('/:id', (req, res) => {
+    // get a post from the database with an id from the database or return 500 error if unsuccessful
+    data.findById( Number(req.params.id) ) // url id is a string, so it needs to be converted to a number
+        .then(post => {
+            // [] is a truthy value, so we have to account for that
+            if (post.length > 0){ 
+                res.status(201).json(post)
+            } else {
+                res.status(404).json({ message: "The post with the specified ID does not exist." })
+            }
+        })
+        .catch(() => {
+            res.status(500).json({ error: "The post information could not be retrieved." })
+        })
+})
+
+
+
 
 module.exports = router
