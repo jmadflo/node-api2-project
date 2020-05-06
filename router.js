@@ -140,15 +140,14 @@ router.put('/:id', (req, res) => {
         // locate the post to be updated
         data.findById( Number(req.params.id) )
             .then(postToUpdate => {
-                // console.log(post)
+                // console.log(postToUpdate)
                 // console.log(req.body)
                 // update post with information in body
                 data.update(postToUpdate[0].id, req.body)
                     .then(numberOfPostUpdates => {
                         // console.log(numberOfPostUpdates)
                         // we expect numberOfPostUpdates to be 1 if update worked as planned
-                        if (numberOfPostUpdates == 1) {
-                            // console.log(post)
+                        if (numberOfPostUpdates === 1) {
                             data.findById(postToUpdate[0].id)
                                 .then(updatedPost => {
                                     res.status(200).json(updatedPost)
