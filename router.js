@@ -88,6 +88,30 @@ router.get('/:id', (req, res) => {
         })
 })
 
+router.get('/:id/comments', (req, res) => {
+    // get a post from the database with an id from the database or return 500 error if unsuccessful
+    data.findById( Number(req.params.id))
+        .then(post => {
+            if (post.length > 0){
+                // get all comments from that post
+                data.findPostComments(post[0].id)
+                    .then(comments => {
+                        res.status(201).json(comments)
+                    })
+                    .catch(() => {
+                        res.status(500).json({ error: "The comments information could not be retrieved." })
+                    })
+            } else {
+                res.status(404).json({ message: "The post with the specified ID does not exist." })
+            }
+        })
+        .catch(() => {
+            res.status(404).json({ message: "The post with the specified ID does not exist." })
+        })
+})
+
+
+
 
 
 
