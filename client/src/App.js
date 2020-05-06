@@ -10,17 +10,11 @@ function App() {
     id: '',
     title: '',
     contents: '',
-    created_at: '',
-    updated_at: ''
   })
 
   const [ commentFormValues, setCommentFormValues ] = useState({
     id: '',
     text: '',
-    created_at: '',
-    updated_at: '',
-    post_id: '',
-    post: ''
   })
 
   // update form values
