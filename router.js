@@ -110,9 +110,27 @@ router.get('/:id/comments', (req, res) => {
         })
 })
 
-
-
-
+router.delete('/:id', (req, res) => {
+    // get a post from the database with an id from the database or return 500 error if unsuccessful
+    data.findById( Number(req.params.id) )
+        .then(post => {
+            if (post.length > 0){
+                // delete the post now that its existence has been confirmed 
+                data.remove( Number(req.params.id) )
+                    .then(() => {
+                        res.status(201).json({ message: `The post with an id of ${req.params.id} has been deleted` })
+                    })
+                    .catch(() => {
+                        res.status(500).json({ error: "The post could not be removed" })
+                    })
+            } else {
+                res.status(404).json({ message: "The post with the specified ID does not exist." })
+            }
+        })
+        .catch(() => {
+            res.status(404).json({ message: "The post with the specified ID does not exist." })
+        })
+})
 
 
 module.exports = router
