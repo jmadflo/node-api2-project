@@ -59,14 +59,14 @@ function App() {
   }
 
   // get comments with post id
-  // const getPostById = () => {
-  //   axios.get(`http://localhost:8000/api/dataToRender/${postFormValues.id}`)
-  //     .then(response => {
-  //       console.log(response)
-  //       setDataToRender(response.data)
-  //     })
-  //     .catch(error => console.log(error))
-  // }
+  const getCommentsById = () => {
+    axios.get(`http://localhost:9000/api/posts/${postFormValues.id || commentFormValues.id}/comments`)
+      .then(response => {
+        console.log(response)
+        setDataToRender(response.data)
+      })
+      .catch(error => console.log(error))
+  }
 
   // post a new user
   // const postNew = () => {
@@ -130,8 +130,8 @@ function App() {
         <div className='buttonContainer'>
           <button onClick={getAllPosts}>Get All Posts</button>
           <button onClick={getPostById}>Get Post By Id</button>
-          {/* <button onClick={getCommentsById}>Get Comments By Post Id</button>
-          <button onClick={postNewPost}>Post New Post</button>
+          <button onClick={getCommentsById}>Get Comments By Post Id</button>
+          {/* <button onClick={postNewPost}>Post New Post</button>
           <button onClick={postNewComment}>Post New Comment</button>
           <button onClick={deletePost}>Delete Post</button>
           <button onClick={editPost}>Edit Post</button> */}
