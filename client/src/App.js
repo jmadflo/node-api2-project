@@ -50,7 +50,7 @@ function App() {
 
   // get a specific user by id
   const getPostById = () => {
-    axios.get(`http://localhost:8000/api/dataToRender/${postFormValues.id}`)
+    axios.get(`http://localhost:9000/api/posts/${postFormValues.id}`)
       .then(response => {
         console.log(response)
         setDataToRender(response.data)
