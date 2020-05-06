@@ -5,7 +5,7 @@ import './App.css'
 function App() {
   // user data from api
   const [ dataToRender, setDataToRender] = useState([])
-  // need a dependency for the useEffect hook to fetch updated data every time we modify
+  
   const [ postFormValues, setPostFormValues ] = useState({
     id: '',
     title: '',
